@@ -89,6 +89,24 @@ conduct a power analysis. How many observations would the researchers
 need to detect a moderate-to-large effect ($d=0.65$) when using 
 $\alpha=0.05$ and default power (0.80) for a two-sided one sample 
 $t$ test.
+
+
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{power.test} \hlkwb{<-} \hlkwd{pwr.t.test}\hldef{(}\hlkwc{d} \hldef{=} \hlnum{0.65}\hldef{,}
+           \hlkwc{sig.level} \hldef{=} \hlnum{0.05}\hldef{,}
+           \hlkwc{power} \hldef{=} \hlnum{0.80}\hldef{,}
+           \hlkwc{type} \hldef{=} \hlsng{"one.sample"}\hldef{,}
+           \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{)}
+\hldef{(observations} \hlkwb{<-} \hldef{power.test[[}\hlnum{1}\hldef{]])}
+\end{alltt}
+\begin{verbatim}
+## [1] 20.58039
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % COLLECT DATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -98,6 +116,8 @@ do to collect the data for Figure 2(g). Note that you only need the
 \texttt{closer\_vals} and \texttt{further\_vals}. Ensure to 
 \texttt{mutate()} the data to get a difference 
 (e.g., \texttt{closer\_vals - further\_vals}).
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % SUMMARIZE DATA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,14 +125,45 @@ do to collect the data for Figure 2(g). Note that you only need the
 \begin{enumerate}
   \item Summarize the further data. Do the data suggest that
    dopamine in the brains of young zebra finches decreases when
-   they sing further away?
+   they sing further away? \newline
+   \textbf{Answer: Yes, looking at table \ref{table1}, the dopamine levels decrease when the zebra finches sing further away from their adult song.}
+  
    \item Summarize the closer data. Do the data suggest that
    dopamine in the brains of young zebra finches increases when
-   they sing closer to their adult song?
+   they sing closer to their adult song?\newline
+   \textbf{Answer: Yes, looking at table \ref{table1}, the dopamine levels slightly increase when the zebra finches sing closer to their adult song. }
+   
   \item Summarize the paired differences. Do the data suggest
   that there is a difference between dopamine in the brains of
   young zebra finches when they sing further away compared to 
-  closer to their adult song?
+  closer to their adult song? 
+  \newline
+  \textbf{Answer: Yes, looking at table \ref{table1}, the dopamine levels increase more when the zebra finches sing closer to their adult song compared to when it is further away. }
+  
+  \begin{figure}[H]
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-3-1} 
+\end{knitrout}
+\caption{Graphical summary}
+\label{plot1} 
+\end{center}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rlrrrrrrrr}
+  \hline
+ & type & min & max & mean & sd & median & IQR & skewness & exkurtosis \\ 
+  \hline
+1 & far & -0.60 & -0.03 & -0.20 & 0.13 & -0.19 & 0.19 & -1.04 & 1.19 \\ 
+  2 & close & 0.00 & 0.34 & 0.16 & 0.09 & 0.15 & 0.11 & 0.30 & -0.86 \\ 
+  3 & difference & 0.04 & 0.93 & 0.36 & 0.21 & 0.33 & 0.24 & 0.77 & 0.13 \\ 
+   \hline
+\end{tabular} \caption{Numerical summary} \label{table1}
+\end{table}
+
   \item \textbf{Optional Challenge:} Can you reproduce Figure 2(g)?
   Note that the you can use \texttt{geom\_errorbar()} to plot
   the range created by adding the mean $\pm$ one standard deviation.
@@ -125,20 +176,93 @@ a little more comprehensively -- that is your parenthetical should look somethin
 like: ($t=23.99$, $p<0.0001$; $g=1.34$; 95\% CI: 4.43, 4.60).\\
 \textbf{Note:} Your numbers may vary slightly as they performed some unclear
 correction of their $p$-values. I'm waiting to hear back from them via email!
+
+
 \begin{enumerate}
   \item ``The close responses differed significantly from 0 ($p=1.63 \times 10^{-8}$).''
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{closer.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=close.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{)}
+\hldef{t.close} \hlkwb{<-} \hldef{closer.test[[}\hlnum{1}\hldef{]][[}\hlnum{1}\hldef{]]} \hlcom{#finding the t value }
+\hldef{p.close} \hlkwb{<-} \hldef{closer.test[[}\hlnum{3}\hldef{]]} \hlcom{#finding the p value}
+\hldef{g.close} \hlkwb{<-} \hlkwd{interpret_hedges_g}\hldef{(}\hlkwd{hedges_g}\hldef{(}\hlkwc{x} \hldef{= close.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+For a right sided t-test, the close responses differed largely from 0 ($t=8.30$, $p=8.13 \times 10^{-9}$; $g=1.61$; 95\% CI: 1.10, Inf). 
+
   \item ``The far responses differed significantly from 0 ($p=5.17 \times 10^{-8}$).''
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{farther.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=far.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"less"}\hldef{)}
+\hldef{t.far} \hlkwb{<-} \hldef{farther.test[[}\hlnum{1}\hldef{]][[}\hlnum{1}\hldef{]]} \hlcom{#finding the t value }
+\hldef{p.far} \hlkwb{<-} \hldef{farther.test[[}\hlnum{3}\hldef{]]} \hlcom{#finding the p value}
+\hldef{g.far} \hlkwb{<-} \hlkwd{interpret_hedges_g}\hldef{(}\hlkwd{hedges_g}\hldef{(}\hlkwc{x} \hldef{= far.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"less"}\hldef{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, $p=2.59 \times 10^{-8}$; $g= -1.51$; 95\% CI:-Inf, -1.02). 
+
   \item ``The difference between populations was significant ($p=1.04 \times10^{-8}$).''
+\begin{knitrout}\scriptsize
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hldef{difference.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=difference.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{)}
+\hldef{t.difference} \hlkwb{<-} \hldef{difference.test[[}\hlnum{1}\hldef{]][[}\hlnum{1}\hldef{]]} \hlcom{#finding the t value }
+\hldef{p.difference} \hlkwb{<-} \hldef{difference.test[[}\hlnum{3}\hldef{]]} \hlcom{#finding the p value}
+\hldef{g.diff} \hlkwb{<-} \hlkwd{interpret_hedges_g}\hldef{(}\hlkwd{hedges_g}\hldef{(}\hlkwc{x} \hldef{= difference.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"two.sided"}\hldef{))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+For a two-sided t-test, the difference between populations is significant ($t= 8.51$, $p=1.04 \times 10^{-8}$; $g= 1.65$; 95\% CI:1.04, 2.24). 
+
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONDUCT THE TESTS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Reverse engineer the hypothesis test plot from Lecture 20 to create accurate
 hypothesis testing plots for each part of the previous question.
+
+
 \begin{enumerate}
-  \item Question 4, part(a).
-  \item Question 4, part(b).
-  \item Question 4, part(c).
+  \item Question 4, part(a).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+
+\begin{figure}[H]
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-9-1} 
+\end{knitrout}
+\label{plot2} 
+\end{center}
+\end{figure}
+
+  \item Question 4, part(b).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+
+\begin{figure}[H]
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-10-1} 
+\end{knitrout}
+\label{plot3} 
+\end{center}
+\end{figure}
+
+  \item Question 4, part(c).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+
+\begin{figure}[H]
+\begin{center}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/unnamed-chunk-11-1} 
+\end{knitrout}
+\label{plot4} 
+\end{center}
+\end{figure}
+
 \end{enumerate}
 \end{enumerate}
 
