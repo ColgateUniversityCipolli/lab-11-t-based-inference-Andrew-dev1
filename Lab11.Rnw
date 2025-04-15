@@ -161,21 +161,21 @@ difference.set <- zebra.finches.dat$difference
 \begin{enumerate}
   \item ``The close responses differed significantly from 0 ($p=1.63 \times 10^{-8}$).''
   << message=FALSE, warning=FALSE, size = 'scriptsize'>>=
-closer.test <- t.test(x=close.set, mu = mu0, alternative = "greater")
+closer.test <- t.test(x=close.set, mu = mu0)
 t.close <- closer.test[[1]][[1]] #finding the t value 
 p.close <- closer.test[[3]] #finding the p value
 g.close <- interpret_hedges_g(hedges_g(x = close.set, mu = mu0, alternative = "greater"))
 @
-For a right sided t-test, the close responses differed largely from 0 ($t=8.30$, $p=8.13 \times 10^{-9}$; $g=1.61$; 95\% CI: 1.10, Inf). 
+For a right sided t-test, the close responses differed largely from 0 ($t=8.30$, $p=8.13 \times 10^{-9}$; $g=1.61$; 95\% CI: 0.117, 0.195). 
 
   \item ``The far responses differed significantly from 0 ($p=5.17 \times 10^{-8}$).''
   << message=FALSE, warning=FALSE, size = 'scriptsize'>>=
-farther.test <- t.test(x=far.set, mu = mu0, alternative = "less")
+farther.test <- t.test(x=far.set, mu = mu0)
 t.far <- farther.test[[1]][[1]] #finding the t value 
 p.far <- farther.test[[3]] #finding the p value
 g.far <- interpret_hedges_g(hedges_g(x = far.set, mu = mu0, alternative = "less"))
 @
-For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, $p=2.59 \times 10^{-8}$; $g= -1.51$; 95\% CI:-Inf, -1.02). 
+For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, $p=2.59 \times 10^{-8}$; $g= -1.51$; 95\% CI: -0.257, -0.149). 
 
   \item ``The difference between populations was significant ($p=1.04 \times10^{-8}$).''
   << message=FALSE, warning=FALSE, size = 'scriptsize'>>=
@@ -184,7 +184,7 @@ t.difference <- difference.test[[1]][[1]] #finding the t value
 p.difference <- difference.test[[3]] #finding the p value
 g.diff <- interpret_hedges_g(hedges_g(x = difference.set, mu = mu0, alternative = "two.sided"))
 @
-For a two-sided t-test, the difference between populations is significant ($t= 8.51$, $p=1.04 \times 10^{-8}$; $g= 1.65$; 95\% CI:1.04, 2.24). 
+For a two-sided t-test, the difference between populations is significant ($t= 8.51$, $p=1.04 \times 10^{-8}$; $g= 1.65$; 95\% CI:0.272, 0.446). 
 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,7 +271,7 @@ xbar.breaks.diff <- t.breaks.diff * s/(sqrt(n)) + mu0
 @
 
 \begin{enumerate}
-  \item Question 4, part(a).The data is greater than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0. 
+  \item Question 4, part(a).The t statistic is greater than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0. 
   <<plot2, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the close data in comparison to the null distribution 
 ggplot() +
@@ -314,7 +314,7 @@ ggplot() +
 \end{center}
 \end{figure}
 
-  \item Question 4, part(b). The data is less than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
+  \item Question 4, part(b). The t statistic is less than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 <<plot3, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the far data in comparison to the null distribution 
 ggplot() +
@@ -358,7 +358,7 @@ ggplot() +
 \end{center}
 \end{figure}
 
-  \item Question 4, part(c). The data is not within the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
+  \item Question 4, part(c). The t statistic is not within the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 <<plot4, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the difference data in comparison to the null distribution 
 ggplot() +

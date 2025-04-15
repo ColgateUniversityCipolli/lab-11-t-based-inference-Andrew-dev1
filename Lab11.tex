@@ -183,27 +183,27 @@ correction of their $p$-values. I'm waiting to hear back from them via email!
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{closer.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=close.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{)}
+\hldef{closer.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=close.set,} \hlkwc{mu} \hldef{= mu0)}
 \hldef{t.close} \hlkwb{<-} \hldef{closer.test[[}\hlnum{1}\hldef{]][[}\hlnum{1}\hldef{]]} \hlcom{#finding the t value }
 \hldef{p.close} \hlkwb{<-} \hldef{closer.test[[}\hlnum{3}\hldef{]]} \hlcom{#finding the p value}
 \hldef{g.close} \hlkwb{<-} \hlkwd{interpret_hedges_g}\hldef{(}\hlkwd{hedges_g}\hldef{(}\hlkwc{x} \hldef{= close.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"greater"}\hldef{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-For a right sided t-test, the close responses differed largely from 0 ($t=8.30$, $p=8.13 \times 10^{-9}$; $g=1.61$; 95\% CI: 1.10, Inf). 
+For a right sided t-test, the close responses differed largely from 0 ($t=8.30$, $p=8.13 \times 10^{-9}$; $g=1.61$; 95\% CI: 0.117, 0.195). 
 
   \item ``The far responses differed significantly from 0 ($p=5.17 \times 10^{-8}$).''
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{farther.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=far.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"less"}\hldef{)}
+\hldef{farther.test} \hlkwb{<-} \hlkwd{t.test}\hldef{(}\hlkwc{x}\hldef{=far.set,} \hlkwc{mu} \hldef{= mu0)}
 \hldef{t.far} \hlkwb{<-} \hldef{farther.test[[}\hlnum{1}\hldef{]][[}\hlnum{1}\hldef{]]} \hlcom{#finding the t value }
 \hldef{p.far} \hlkwb{<-} \hldef{farther.test[[}\hlnum{3}\hldef{]]} \hlcom{#finding the p value}
 \hldef{g.far} \hlkwb{<-} \hlkwd{interpret_hedges_g}\hldef{(}\hlkwd{hedges_g}\hldef{(}\hlkwc{x} \hldef{= far.set,} \hlkwc{mu} \hldef{= mu0,} \hlkwc{alternative} \hldef{=} \hlsng{"less"}\hldef{))}
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, $p=2.59 \times 10^{-8}$; $g= -1.51$; 95\% CI:-Inf, -1.02). 
+For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, $p=2.59 \times 10^{-8}$; $g= -1.51$; 95\% CI: -0.257, -0.149). 
 
   \item ``The difference between populations was significant ($p=1.04 \times10^{-8}$).''
 \begin{knitrout}\scriptsize
@@ -216,7 +216,7 @@ For a left sided t-test, the far responses differed largely from 0 ($t= -7.78$, 
 \end{alltt}
 \end{kframe}
 \end{knitrout}
-For a two-sided t-test, the difference between populations is significant ($t= 8.51$, $p=1.04 \times 10^{-8}$; $g= 1.65$; 95\% CI:1.04, 2.24). 
+For a two-sided t-test, the difference between populations is significant ($t= 8.51$, $p=1.04 \times 10^{-8}$; $g= 1.65$; 95\% CI:0.272, 0.446). 
 
 \end{enumerate}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -227,7 +227,7 @@ hypothesis testing plots for each part of the previous question.
 
 
 \begin{enumerate}
-  \item Question 4, part(a).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(a).The t statistic is greater than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0. 
 
 \begin{figure}[H]
 \begin{center}
@@ -239,7 +239,7 @@ hypothesis testing plots for each part of the previous question.
 \end{center}
 \end{figure}
 
-  \item Question 4, part(b).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(b). The t statistic is less than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 
 \begin{figure}[H]
 \begin{center}
@@ -251,7 +251,7 @@ hypothesis testing plots for each part of the previous question.
 \end{center}
 \end{figure}
 
-  \item Question 4, part(c).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(c). The t statistic is not within the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 
 \begin{figure}[H]
 \begin{center}

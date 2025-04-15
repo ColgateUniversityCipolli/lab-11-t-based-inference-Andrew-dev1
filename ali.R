@@ -65,12 +65,12 @@ far.set <- zebra.finches.dat$far
 close.set <- zebra.finches.dat$close
 difference.set <- zebra.finches.dat$difference
 
-closer.test <- t.test(x=close.set, mu = mu0, alternative = "greater")
+closer.test <- t.test(x=close.set, mu = mu0)
 t.close <- closer.test[[1]][[1]] #finding the t value 
 (p.close <- closer.test[[3]]) #finding the p value
 g.close <- interpret_hedges_g(hedges_g(x = close.set, mu = mu0, alternative = "greater"))
 
-farther.test <- t.test(x=far.set, mu = mu0, alternative = "less")
+farther.test <- t.test(x=far.set, mu = mu0)
 t.far <- farther.test[[1]][[1]] #finding the t value 
 (p.far <- farther.test[[3]]) #finding the p value
 g.far <- interpret_hedges_g(hedges_g(x = far.set, mu = mu0, alternative = "less"))
