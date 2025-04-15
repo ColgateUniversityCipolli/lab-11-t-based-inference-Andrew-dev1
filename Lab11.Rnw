@@ -271,7 +271,7 @@ xbar.breaks.diff <- t.breaks.diff * s/(sqrt(n)) + mu0
 @
 
 \begin{enumerate}
-  \item Question 4, part(a).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(a).The data is greater than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0. 
   <<plot2, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the close data in comparison to the null distribution 
 ggplot() +
@@ -314,7 +314,7 @@ ggplot() +
 \end{center}
 \end{figure}
 
-  \item Question 4, part(b).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(b). The data is less than the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 <<plot3, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the far data in comparison to the null distribution 
 ggplot() +
@@ -358,7 +358,7 @@ ggplot() +
 \end{center}
 \end{figure}
 
-  \item Question 4, part(c).The data is outside of the range of the null hypothesis, so the mean is probably not 0. 
+  \item Question 4, part(c). The data is not within the rejection zone, and the p-value is incredibly small, so the mean is probably not 0.
 <<plot4, echo=FALSE, eval=F, message=FALSE, warning=FALSE, size='scriptsize'>>=
 ## plotting the difference data in comparison to the null distribution 
 ggplot() +
