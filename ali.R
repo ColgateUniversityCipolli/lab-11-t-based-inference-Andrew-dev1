@@ -92,17 +92,38 @@ g.diff <- interpret_hedges_g(hedges_g(x = difference.set, mu = mu0, alternative 
 any(is.na(close.set)) # no missing data
 (close.t.stat <- (xbar - mu0)/(s/sqrt(n)))
 
+#### calculating the t and bar breaks for far, close and difference 
+t.breaks <- c(-5, qt(0.05, df = n-1), # rejection region (left)
+              0, 5, close.t.stat)                  # t-statistic observed
+xbar.breaks <- t.breaks * s/(sqrt(n)) + mu0
+
+
 (xbar <- mean(far.set))
 (s <- sd(far.set))
 (n <- length(far.set))
 any(is.na(far.set)) # no missing data
 (far.t.stat <- (xbar - mu0)/(s/sqrt(n)))
 
+t.breaks.far <- c(-5,  0, qt(0.95, df = n-1),   # rejection region (right)
+                  5,
+                  far.t.stat)                  # t-statistic observed
+xbar.breaks.far <- t.breaks.far * s/(sqrt(n)) + mu0
+
+
 (xbar <- mean(difference.set))
 (s <- sd(difference.set))
 (n <- length(difference.set))
 any(is.na(difference.set)) # no missing data
 (difference.t.stat <- (xbar - mu0)/(s/sqrt(n)))
+
+t.breaks.diff <- c(-5, qt(0.025, df = n-1), # rejection region (left)
+                   0, 
+                   qt(0.975, df = n-1), 5,  # rejection region (right)
+                   difference.t.stat)                  # t-statistic observed
+xbar.breaks.diff <- t.breaks.diff * s/(sqrt(n)) + mu0
+
+
+
 
 ggdat.obs <- tibble(close.t    = close.t.stat, 
                     far.t = far.t.stat,
@@ -138,21 +159,6 @@ for(i in 1:R){
   
 }
 
-#### calculating the t and bar breaks for far, close and difference 
-t.breaks <- c(-5, qt(0.05, df = n-1), # rejection region (left)
-              0, 5, close.t.stat)                  # t-statistic observed
-xbar.breaks <- t.breaks * s/(sqrt(n)) + mu0
-
-t.breaks.far <- c(-5,  0, qt(0.95, df = n-1),   # rejection region (right)
-                  5,
-                  far.t.stat)                  # t-statistic observed
-xbar.breaks.far <- t.breaks.far * s/(sqrt(n)) + mu0
-
-t.breaks.diff <- c(-5, qt(0.025, df = n-1), # rejection region (left)
-                  0, 
-                  qt(0.975, df = n-1), 5,  # rejection region (right)
-                  difference.t.stat)                  # t-statistic observed
-xbar.breaks.diff <- t.breaks.diff * s/(sqrt(n)) + mu0
 
 
 ## plotting the close data in comparison to the null distribution 
